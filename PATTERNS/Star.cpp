@@ -104,7 +104,7 @@ int main()
     //     }
     //     cout << endl;
     // }
-    //2nd Pyramid
+    // 2nd Pyramid
     // for (int L = n; L >= 1; L--)
     // {
     //     for (int M = 1; M <= n - L; M++)
@@ -118,31 +118,39 @@ int main()
     //     cout << endl;
     // }
 
-    //Butterfly Pattern
+    // Butterfly Pattern
 
-    for(int i=1;i<=n;i++){
-        for(int j=1;j<=i;j++){
-            cout<<"*"<<" ";
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << "*" << " ";
         }
-        for(int k=1;k<=2*(n-i);k++){
-            cout<<" "<<" ";
+        for (int k = 1; k <= 2 * (n - i); k++)
+        {
+            cout << " " << " ";
         }
-        for(int L=1;L<=i;L++){
-            cout<<"*"<<" ";
+        for (int L = 1; L <= i; L++)
+        {
+            cout << "*" << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
-     for(int i=n;i>=1;i--){
-        for(int j=1;j<=i;j++){
-            cout<<"*"<<" ";
+    for (int i = n; i >= 1; i--)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            cout << "*" << " ";
         }
-        for(int k=1;k<=2*(n-i);k++){
-            cout<<" "<<" ";
+        for (int k = 1; k <= 2 * (n - i); k++)
+        {
+            cout << " " << " ";
         }
-        for(int L=1;L<=i;L++){
-            cout<<"*"<<" ";
+        for (int L = 1; L <= i; L++)
+        {
+            cout << "*" << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
     return 0;
 }

@@ -19,11 +19,10 @@ int binarySearch(int arr[], int n, int key)
             start = mid + 1;
         }
     }
-
 }
 int main()
 {
-    int arr[] = {1,2,3,4,5,6,7,8,9,10,11};
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
     int n = sizeof(arr) / sizeof(arr[0]);
     cout << "key value present at this index:" << binarySearch(arr, n, 7);
     return 0;
