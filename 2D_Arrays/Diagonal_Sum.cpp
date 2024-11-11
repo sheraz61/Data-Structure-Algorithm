@@ -3,21 +3,30 @@ using namespace std;
 void diagonalSum(int mtx[][4], int n, int m)
 {
     int sum = 0;
+    // for (int i = 0; i < n; i++)
+    // {
+    //     for (int j = 0; j < m; j++)
+    //     {
+    //         if (i == j)
+    //         {
+    //             sum += mtx[i][j];
+    //         }
+    //         else if (j == n - i - 1)
+    //         {
+    //             sum += mtx[i][j];
+    //         }
+    //     }
+    // }
+    // BEST CASE
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < m; j++)
+        sum += mtx[i][i];
+        if (i != n - i - 1)
         {
-            if (i == j)
-            {
-                sum += mtx[i][j];
-            }
-            else if (j == n - i - 1)
-            {
-                sum += mtx[i][j];
-            }
+            sum += mtx[i][n - i - 1];
         }
     }
-    cout<<"Sum of Diagonal elements "<<sum<<endl;
+    cout << "Sum of Diagonal elements " << sum << endl;
 }
 int main()
 {
