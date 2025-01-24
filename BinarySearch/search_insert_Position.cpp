@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
 using namespace std;
- int lowerBound(vector<int>& nums, int target, int n) {
+ int insertAtPostion(vector<int>& nums, int target, int n) {
         int low = 0, high = n - 1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
@@ -16,7 +16,7 @@ using namespace std;
 int main(){
   vector<int> nums={1,2,4,7};
   int target=9;
-  int result=lowerBound(nums,target,nums.size());
+  int result=insertAtPostion(nums,target,nums.size());
   cout<<result;
   return 0;
 }
