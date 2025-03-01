@@ -47,11 +47,28 @@ Node* buildBST(int arr[], int n)
     }
     return root;
 }
+// Print in Range
+void printInRange(Node*root,int st,int en){
+    if(root==NULL){
+        return;
+    }
+    if(st<=root->data && root->data<en){
+        cout<<root->data<<" ";
+        printInRange(root->left,st,en);
+        printInRange(root->right,st,en);
+    }else if(root->data<st){
+        printInRange(root->right,st,en);
+    }else{
+        printInRange(root->left,st,en);
+    }
+}
 int main()
 {
     int arr[] = {5, 1, 3, 4, 2, 7, 6, 8};
     int n = sizeof(arr) / sizeof(arr[0]);
     Node* root = buildBST(arr, n);
     inorder(root);
+    cout<<endl;
+    printInRange(root,2,6);
     return 0;
 }
