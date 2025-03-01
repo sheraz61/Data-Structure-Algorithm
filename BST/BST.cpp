@@ -62,6 +62,13 @@ void printInRange(Node*root,int st,int en){
         printInRange(root->left,st,en);
     }
 }
+//inorder successor
+Node* IS(Node* root){
+    while(root->left!=NULL){
+        root=root->left;
+    }
+    return root;
+}
 int main()
 {
     int arr[] = {5, 1, 3, 4, 2, 7, 6, 8};
