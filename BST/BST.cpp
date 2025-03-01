@@ -29,6 +29,15 @@ Node *insert(Node *root, int val)
     }
     return root;
 }
+Node *buildBST(int arr[], int n)
+{
+    Node *root = NULL;
+    for (int i = 0; i < n; i++)
+    {
+        root = insert(root, arr[i]);
+    }
+    return root;
+}
 void inorder(Node *root)
 {
     if (root == NULL)
@@ -39,15 +48,7 @@ void inorder(Node *root)
     cout << root->data << " ";
     inorder(root->right);
 }
-Node *buildBST(int arr[], int n)
-{
-    Node *root = NULL;
-    for (int i = 0; i < n; i++)
-    {
-        root = insert(root, arr[i]);
-    }
-    return root;
-}
+
 // Print in Range
 void printInRange(Node *root, int st, int en)
 {
@@ -110,6 +111,23 @@ void rootToLeafPath(Node *root)
     vector<int> path;
     pathHelper(root, path);
 }
+// validate BST
+bool validateHelper(Node *root, Node *min, Node *max)
+{
+    if (root == NULL)
+    {
+        return true;
+    }
+    if (min != NULL && root->data < min->data)
+        return false;
+    if (max != NULL && root->data > max->data)
+        return false;
+    return validateHelper(root->left, min, root) && validateHelper(root->right, root, max);
+}
+bool validateBST(Node *root)
+{
+    return validateHelper(root, NULL, NULL);
+}
 int main()
 {
     int arr[] = {5, 1, 3, 4, 2, 7, 6, 8};
@@ -122,6 +140,6 @@ int main()
     Node *temp = IS(root);
     cout << "Inorder Successor of 3 is : " << temp->data << endl;
     rootToLeafPath(root);
-
+    cout << validateBST(root) << endl;
     return 0;
 }
