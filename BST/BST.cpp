@@ -223,7 +223,7 @@ Info *largestBST(Node *root)
 }
 int main()
 {
-    int arr[] = {5, 1, 3, 4, 2, 7, 6, 8};
+    int arr[] = {5,30,20,50,45,60,65,70,80};
     int n = sizeof(arr) / sizeof(arr[0]);
     Node *root = buildBST(arr, n);
     inorder(root);
