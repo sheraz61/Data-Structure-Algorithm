@@ -185,7 +185,41 @@ Node *balanceBST(Node *root)
     int n = in.size();
     // build balanced BST
     return buildBSTFromSortedVector(in, 0, n - 1);
-
+}
+// size of largest BST in BT
+class Info
+{
+public:
+    int size;
+    int min;
+    int max;
+    bool isBST;
+    Info(bool isBST, int min, int max, int size)
+    {
+        this->isBST = isBST;
+        this->min = min;
+        this->max = max;
+        this->size = size;
+    }
+};
+static int maxSize;
+Info *largestBST(Node *root)
+{
+    if (root == NULL)
+    {
+        return new Info(true, INT16_MAX, INT16_MIN, 0);
+    }
+    Info *leftInfo = largestBST(root->left);
+    Info *rightInfo = largestBST(root->right);
+    int currMin = min(root->data, min(leftInfo->min, rightInfo->min));
+    int currMax = max(root->data, max(leftInfo->max, rightInfo->max));
+    int currSize = leftInfo->size + rightInfo->size + 1;
+    if (leftInfo->isBST && rightInfo->isBST && root->data > leftInfo->max && root->data < rightInfo->min)
+    {
+        maxSize = max(maxSize, currSize);
+        return new Info(true, currMin, currMax, currSize);
+    }
+    return new Info(false, currMin, currMax, currSize);
 }
 int main()
 {
@@ -194,17 +228,9 @@ int main()
     Node *root = buildBST(arr, n);
     inorder(root);
     cout << endl;
-    printInRange(root, 2, 6);
-    cout << endl;
-    Node *temp = IS(root);
-    cout << "Inorder Successor of 3 is : " << temp->data << endl;
-    rootToLeafPath(root);
-    cout << validateBST(root) << endl;
-    int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8};
-    Node *root1 = buildBSTFromSortedArray(arr1, 0, 7);
-    preOrder(root1);
-    cout << endl; 
-    Node *root2 = balanceBST(root);
-    preOrder(root2);
+    //largest BST
+    maxSize = 0;
+    largestBST(root);
+    cout << maxSize << endl;
     return 0;
 }
