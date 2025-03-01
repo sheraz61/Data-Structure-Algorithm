@@ -128,6 +128,27 @@ bool validateBST(Node *root)
 {
     return validateHelper(root, NULL, NULL);
 }
+
+//sorted array to balanced BST
+Node* buildBSTFromSortedArray(int arr[],int st,int en){
+    if(st>en){
+        return NULL;
+    }
+    int mid=(st+en)/2;
+    Node *curr=new Node(arr[mid]);
+    curr->left=buildBSTFromSortedArray(arr,st,mid-1);
+    curr->right=buildBSTFromSortedArray(arr,mid+1,en);
+    return curr;
+}
+//print to check BST
+void preOrder(Node* root){
+    if(root==NULL){
+        return;
+    }
+    cout<<root->data<<" ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
 int main()
 {
     int arr[] = {5, 1, 3, 4, 2, 7, 6, 8};
@@ -141,5 +162,9 @@ int main()
     cout << "Inorder Successor of 3 is : " << temp->data << endl;
     rootToLeafPath(root);
     cout << validateBST(root) << endl;
+    int arr1[]={1,2,3,4,5,6,7,8};
+    Node* root1=buildBSTFromSortedArray(arr1,0,7);
+    preOrder(root1);
+    
     return 0;
 }
