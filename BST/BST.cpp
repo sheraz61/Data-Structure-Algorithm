@@ -129,25 +129,63 @@ bool validateBST(Node *root)
     return validateHelper(root, NULL, NULL);
 }
 
-//sorted array to balanced BST
-Node* buildBSTFromSortedArray(int arr[],int st,int en){
-    if(st>en){
+// sorted array to balanced BST
+Node *buildBSTFromSortedArray(int arr[], int st, int en)
+{
+    if (st > en)
+    {
         return NULL;
     }
-    int mid=(st+en)/2;
-    Node *curr=new Node(arr[mid]);
-    curr->left=buildBSTFromSortedArray(arr,st,mid-1);
-    curr->right=buildBSTFromSortedArray(arr,mid+1,en);
+    int mid = (st + en) / 2;
+    Node *curr = new Node(arr[mid]);
+    curr->left = buildBSTFromSortedArray(arr, st, mid - 1);
+    curr->right = buildBSTFromSortedArray(arr, mid + 1, en);
     return curr;
 }
-//print to check BST
-void preOrder(Node* root){
-    if(root==NULL){
+// print to check BST
+void preOrder(Node *root)
+{
+    if (root == NULL)
+    {
         return;
     }
-    cout<<root->data<<" ";
+    cout << root->data << " ";
     preOrder(root->left);
     preOrder(root->right);
+}
+// convert BST to balanced BST
+Node *buildBSTFromSortedVector(vector<int> arr, int st, int en)
+{
+    if (st > en)
+    {
+        return NULL;
+    }
+    int mid = (st + en) / 2;
+    Node *curr = new Node(arr[mid]);
+    curr->left = buildBSTFromSortedVector(arr, st, mid - 1);
+    curr->right = buildBSTFromSortedVector(arr, mid + 1, en);
+    return curr;
+}
+void getInorder(Node *root, vector<int> &nodes)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    getInorder(root->left, nodes);
+    nodes.push_back(root->data);
+    getInorder(root->right, nodes);
+}
+Node *balanceBST(Node *root)
+{
+    // get inorder
+    vector<int> in;
+    getInorder(root, in);
+    // get size of array
+    int n = in.size();
+    // build balanced BST
+    return buildBSTFromSortedVector(in, 0, n - 1);
+
 }
 int main()
 {
@@ -162,9 +200,11 @@ int main()
     cout << "Inorder Successor of 3 is : " << temp->data << endl;
     rootToLeafPath(root);
     cout << validateBST(root) << endl;
-    int arr1[]={1,2,3,4,5,6,7,8};
-    Node* root1=buildBSTFromSortedArray(arr1,0,7);
+    int arr1[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    Node *root1 = buildBSTFromSortedArray(arr1, 0, 7);
     preOrder(root1);
-    
+    cout << endl; 
+    Node *root2 = balanceBST(root);
+    preOrder(root2);
     return 0;
 }
